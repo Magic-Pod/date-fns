@@ -66,7 +66,7 @@ test('Given an unexpected locale, should raise an error', () => {
   expect(() =>
     getDateFromFormat(DATE_FORMAT_DEFAULT, DURATION_DEFAULT, unacceptableLocale)
   ).toThrow(
-    'No such locale supported. Currently we only support `ja` or `en-US` for locale'
+    'No such locale supported. Currently we only support `en-US`, `ja-JP`, and `ko-KR` for locale'
   )
 })
 
@@ -88,8 +88,9 @@ test('Given a valid duration, should apply the duration', () => {
 
 describe.each`
   locale     | expected
-  ${'ja'}    | ${'日'}
+  ${'ja-JP'} | ${'日'}
   ${'en-US'} | ${'day'}
+  ${'ko-KR'} | ${'수요일'}
 `(
   'Given an locale($locale), should translate day($expected)',
   ({ locale, expected }) => {

@@ -1,8 +1,9 @@
 const format = require('date-fns/format')
 const add = require('date-fns/add')
 const locales = {
-  ja: require('date-fns/locale/ja'),
-  'en-US': require('date-fns/locale/en-US')
+  'ja-JP': require('date-fns/locale/ja'),
+  'en-US': require('date-fns/locale/en-US'),
+  'ko-KR': require('date-fns/locale/ko')
 }
 const acceptableKeys = [
   'years',
@@ -45,7 +46,7 @@ const argumentCheck = function(dateFormat, duration, locale) {
 
   if (!Object.keys(locales).includes(locale)) {
     throw new Error(
-      'No such locale supported. Currently we only support `ja` or `en-US` for locale'
+      'No such locale supported. Currently we only support `en-US`, `ja-JP`, and `ko-KR` for locale'
     )
   }
 }
