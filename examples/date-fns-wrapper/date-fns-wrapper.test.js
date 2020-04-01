@@ -104,3 +104,21 @@ describe.each`
     })
   }
 )
+
+describe.each`
+  dateFormat               | expected
+  ${'MPD-EPOCH'}           | ${/\d{10}/}
+  ${'MPD-MILLI-SEC-EPOCH'} | ${/\d{13}/}
+`(
+  'Should accept specifal format($dateFormat) for magic-pod',
+  ({ dateFormat, expected }) => {
+    test('passes', () => {
+      const result = getDateFromFormat(
+        dateFormat,
+        DURATION_DEFAULT,
+        LOCALE_DEFAULT
+      )
+      expect(result).toMatch(expected)
+    })
+  }
+)

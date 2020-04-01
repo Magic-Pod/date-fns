@@ -1,5 +1,8 @@
 const format = require('date-fns/format')
 const add = require('date-fns/add')
+const getUnixTime = require('date-fns/getUnixTime')
+const getMilliseconds = require('date-fns/getMilliseconds')
+
 const locales = {
   'ja-JP': require('date-fns/locale/ja'),
   'en-US': require('date-fns/locale/en-US'),
@@ -51,12 +54,30 @@ const argumentCheck = function(dateFormat, duration, locale) {
   }
 }
 
+const getMillisecondEpochTime = function(duration) {
+  const date = add(new Date(), duration)
+  return getUnixTime(date).toString() + getMilliseconds(date).toString()
+}
+
+const getEpochTime = function(duration) {
+  const date = add(new Date(), duration)
+  return getUnixTime(date).toString()
+}
+
+const getDateWithFormat = function(dateFormat, duration, locale) {
+  const date = add(new Date(), duration)
+  return format(date, dateFormat, { locale: locales[locale] })
+}
+
 module.exports = function(dateFormat, duration, locale) {
   argumentCheck(dateFormat, duration, locale)
   if (dateFormat === '') {
     return ''
+  } else if (dateFormat === 'MPD-MILLI-SEC-EPOCH') {
+    return getMillisecondEpochTime(duration)
+  } else if (dateFormat === 'MPD-EPOCH') {
+    return getEpochTime(duration)
+  } else {
+    return getDateWithFormat(dateFormat, duration, locale)
   }
-
-  const date = add(new Date(), duration)
-  return format(date, dateFormat, { locale: locales[locale] })
 }
