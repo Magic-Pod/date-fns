@@ -90,7 +90,7 @@ describe.each`
   locale     | expected
   ${'ja-JP'} | ${'日'}
   ${'en-US'} | ${'day'}
-  ${'ko-KR'} | ${'수요일'}
+  ${'ko-KR'} | ${'요일'}
 `(
   'Given an locale($locale), should translate day($expected)',
   ({ locale, expected }) => {
@@ -100,6 +100,7 @@ describe.each`
         DURATION_DEFAULT,
         locale
       )
+      console.log('result: ' + result)
       expect(result).toMatch(expected)
     })
   }
