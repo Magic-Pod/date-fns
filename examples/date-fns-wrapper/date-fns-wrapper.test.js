@@ -66,7 +66,7 @@ test('Given an unexpected locale, should raise an error', () => {
   expect(() =>
     getDateFromFormat(DATE_FORMAT_DEFAULT, DURATION_DEFAULT, unacceptableLocale)
   ).toThrow(
-    'No such locale supported. Currently we only support `en-US`, `ja-JP`, and `ko-KR` for locale'
+    'No such locale supported. Currently we only support `en-US`, `ja-JP`, `ko-KR`, `zh-CN` and `zh-TW` for locale'
   )
 })
 
@@ -91,6 +91,8 @@ describe.each`
   ${'ja-JP'} | ${'日'}
   ${'en-US'} | ${'day'}
   ${'ko-KR'} | ${'요일'}
+  ${'zh-CN'} | ${'星期'}
+  ${'zh-TW'} | ${'星期'}
 `(
   'Given an locale($locale), should translate day($expected)',
   ({ locale, expected }) => {
@@ -100,7 +102,6 @@ describe.each`
         DURATION_DEFAULT,
         locale
       )
-      console.log('result: ' + result)
       expect(result).toMatch(expected)
     })
   }

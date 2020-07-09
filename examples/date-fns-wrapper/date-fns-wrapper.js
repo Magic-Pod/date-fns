@@ -6,7 +6,9 @@ const getMilliseconds = require('date-fns/getMilliseconds')
 const locales = {
   'ja-JP': require('date-fns/locale/ja'),
   'en-US': require('date-fns/locale/en-US'),
-  'ko-KR': require('date-fns/locale/ko')
+  'ko-KR': require('date-fns/locale/ko'),
+  'zh-CN': require('date-fns/locale/zh-CN'),
+  'zh-TW': require('date-fns/locale/zh-TW')
 }
 const acceptableKeys = [
   'years',
@@ -49,7 +51,7 @@ const argumentCheck = function(dateFormat, duration, locale) {
 
   if (!Object.keys(locales).includes(locale)) {
     throw new Error(
-      'No such locale supported. Currently we only support `en-US`, `ja-JP`, and `ko-KR` for locale'
+      'No such locale supported. Currently we only support `en-US`, `ja-JP`, `ko-KR`, `zh-CN` and `zh-TW` for locale'
     )
   }
 }
